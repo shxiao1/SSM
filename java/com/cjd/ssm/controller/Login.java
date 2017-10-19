@@ -11,7 +11,7 @@ public class Login
 	@RequestMapping(value = "/login")
 	public String login()
 	{
-		return "index";
+		return "login";
 	}
 	
 }

@@ -21,8 +21,6 @@
 
 
 
-
-
 	<div data-options="region:'south'" style="height: 50px;">
 		<div style="text-align: center; height: 48px; line-height: 48px;">啊啊啊啊</div>
 	</div>
