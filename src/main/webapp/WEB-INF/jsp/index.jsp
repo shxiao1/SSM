@@ -11,7 +11,12 @@
 <body class="easyui-layout">
 	<div data-options="region:'north'" style="height: 100px;"></div>
 
-	<div data-options="region:'west',title:'菜单',split:true" style="width: 250px;"></div>
+	<div data-options="region:'west',title:'菜单',split:true" style="width: 250px;">
+		asd
+	
+	
+	
+	</div>
 	<div data-options="region:'center'" style="padding: 5px; background: #eee;"></div>
 
 
