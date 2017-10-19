@@ -12,23 +12,30 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-public class MyRealm extends AuthorizingRealm {
 
-    //这里因为没有调用后台，直接默认只有一个用户("luoguohui"，"123456")
-    private static final String USER_NAME = "luoguohui";  
-    private static final String PASSWORD = "123456";  
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+public class MyRealm extends AuthorizingRealm {
+	//开启日志输出 
+	private static final Logger LOGGER = LogManager.getLogger(MyRealm.class);
+
+    private static final String USER_NAME = "";  
+    private static final String PASSWORD = "";  
     /* 
      * 授权
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) { 
-        Set<String> roleNames = new HashSet<String>();  
-        Set<String> permissions = new HashSet<String>();  
-        roleNames.add("administrator");//添加角色
-        permissions.add("newPage.jhtml");  //添加权限
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);  
-        info.setStringPermissions(permissions);  
-        return info;  
+    	LOGGER.info("Shiro开始登录认证");
+    	
+    	String username = principals.getPrimaryPrincipal().toString() ;
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo() ;
+/*        Set<String> roleName = t_userService.findRoles(username) ;
+        Set<String> permissions = t_userService.findPermissions(username) ;
+        info.setRoles(roleName);
+        info.setStringPermissions(permissions);*/
+        return info;
     }
     /* 
      * 登录验证
