@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjd.ssm.mapper.sysAccountRoleMapper">
+  <resultMap id="BaseResultMap" type="com.cjd.ssm.pojo.sysAccountRole">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountid" jdbcType="VARCHAR" property="accountid" />
+    <result column="rowid" jdbcType="VARCHAR" property="rowid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountid, rowid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_account_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_account_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cjd.ssm.pojo.sysAccountRole">
+    insert into sys_account_role (id, accountid, rowid
+      )
+    values (#{id,jdbcType=INTEGER}, #{accountid,jdbcType=VARCHAR}, #{rowid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjd.ssm.pojo.sysAccountRole">
+    insert into sys_account_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountid != null">
+        accountid,
+      </if>
+      <if test="rowid != null">
+        rowid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accountid != null">
+        #{accountid,jdbcType=VARCHAR},
+      </if>
+      <if test="rowid != null">
+        #{rowid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjd.ssm.pojo.sysAccountRole">
+    update sys_account_role
+    <set>
+      <if test="accountid != null">
+        accountid = #{accountid,jdbcType=VARCHAR},
+      </if>
+      <if test="rowid != null">
+        rowid = #{rowid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjd.ssm.pojo.sysAccountRole">
+    update sys_account_role
+    set accountid = #{accountid,jdbcType=VARCHAR},
+      rowid = #{rowid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" parameterType="com.cjd.ssm.pojo.sysAccountRole" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_account_role t
+    <where>
+      <include refid="findAllWhere" />
+    </where>
+    <if test="orderStr!=null">
+      <![CDATA[
+           order by  ${orderStr}
+      ]]>
+    </if>
+  </select>
+  <sql id="findAllWhere">
+    <if test="accountid != null and accountid!=''">
+      AND accountid = #{accountid,jdbcType=VARCHAR}
+    </if>
+    <if test="rowid != null and rowid!=''">
+      AND rowid = #{rowid,jdbcType=VARCHAR}
+    </if>
+  </sql>
+</mapper>

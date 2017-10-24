@@ -25,7 +25,7 @@
         <!-- 默认的登陆访问url -->
         <property name="loginUrl" value="/sys/login"/>
         <!-- 登陆成功后跳转的url -->
-        <property name="successUrl" value="/index"/>
+        <property name="successUrl" value="/sys/index"/>
         <!-- 没有权限跳转的url -->
         <property name="unauthorizedUrl" value="/unauth"/>
 
@@ -37,7 +37,11 @@
                     authc 需要认证
                     user  验证通过或RememberMe登录的都可以
                 -->
-               /** = anon
+                /css/**=anon
+                /js/**=anon
+                /images/**=anon
+                /**=anon
+                <!--等权限认证弄完了就设置回来 /**=user -->
             </value>
         </property>
     </bean>

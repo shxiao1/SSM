@@ -1,11 +1,13 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
 <head>
+
 <%@include file="/WEB-INF/head/head.jsp"%>
 
-<meta charset="utf-8">
+
 <title>Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -30,16 +32,25 @@
 	</div>
 
 	<!-- Javascript -->
-	<script src="/ssm/css/assets/js/jquery-1.8.2.min.js"></script>
 	<script src="/ssm/css/assets/js/supersized.3.2.7.min.js"></script>
 	<script src="/ssm/css/assets/js/supersized-init.js"></script>
 
 <script type="text/javascript">
 
+$(function () {  
+}); 
 
 	$('#login_btn').click(function()
 	{
-		alert('asd');
+		$('#login_form').form('submit', {  
+		    url:'/ssm/sys/login',    
+		    onSubmit: function(){   
+		    },    
+		    success:function(data){ 
+		    	alert(data);
+		    }    
+		});  
+
 		/* $('#login_form').submit(); */
 	})
 </script>
