@@ -9,6 +9,7 @@
 	
 <!-- Shiro过滤器 核心-->
 <!-- 配置自定义Realm -->
+
     <bean id="myRealm" class="com.cjd.ssm.shiro.MyRealm"/>
 
 	<!-- 缓存管理器开始 -->  
@@ -40,7 +41,7 @@
                 /css/**=anon
                 /js/**=anon
                 /images/**=anon
-                /**=anon
+                /**=user
                 <!--等权限认证弄完了就设置回来 /**=user -->
             </value>
         </property>

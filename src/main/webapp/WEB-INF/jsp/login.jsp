@@ -47,7 +47,7 @@ $(function () {
 		    onSubmit: function(){   
 		    },    
 		    success:function(data){ 
-		    	alert(data);
+		    	window.location.href = "/ssm/sys/login";
 		    }    
 		});  
 

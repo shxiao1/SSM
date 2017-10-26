@@ -1,29 +1,31 @@
 /*
-* sysAccount.java
+* SysAccount.java
 * Copyright(C) 2009-2016 北京盘古世纪科技发展有限公司
 * All right Reserved
-* 2017-10-21 created
+* 2017-10-26 created
 */
 package com.cjd.ssm.pojo;
 
 import java.io.Serializable;
-public class sysAccount  implements Serializable {
-    /** */
-    private Integer id;
 
-    /** */
+import org.apache.shiro.SecurityUtils;
+
+import com.cjd.ssm.base.BaseEntity;
+
+public class SysAccount extends BaseEntity<SysAccount> implements Serializable {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** */
     private String username;
 
     /** */
     private String password;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -40,4 +42,10 @@ public class sysAccount  implements Serializable {
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
     }
+
+	public String getSysAccount()
+	{
+		return (String) SecurityUtils.getSubject().getPrincipal();
+	}
+    
 }

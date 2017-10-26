@@ -1,30 +1,27 @@
 /*
-* sysAccountRole.java
+* SysAccountRole.java
 * Copyright(C) 2009-2016 北京盘古世纪科技发展有限公司
 * All right Reserved
-* 2017-10-21 created
+* 2017-10-26 created
 */
 package com.cjd.ssm.pojo;
 
 import java.io.Serializable;
 
-public class sysAccountRole implements Serializable {
-    /** */
-    private Integer id;
+import com.cjd.ssm.base.BaseEntity;
+public class SysAccountRole extends BaseEntity<SysAccountRole> implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
     /** */
     private String accountid;
 
     /** */
-    private String rowid;
+    private String roleid;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getAccountid() {
         return accountid;
@@ -34,11 +31,12 @@ public class sysAccountRole implements Serializable {
         this.accountid = accountid == null ? null : accountid.trim();
     }
 
-    public String getRowid() {
-        return rowid;
+    public String getroleid() {
+        return roleid;
     }
 
-    public void setRowid(String rowid) {
-        this.rowid = rowid == null ? null : rowid.trim();
+    public void setroleid(String roleid) {
+        this.roleid = roleid == null ? null : roleid.trim();
     }
+
 }

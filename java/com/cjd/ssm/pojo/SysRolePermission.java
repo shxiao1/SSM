@@ -1,34 +1,29 @@
 /*
-* sysRolePermission.java
+* SysRolePermission.java
 * Copyright(C) 2009-2016 北京盘古世纪科技发展有限公司
 * All right Reserved
-* 2017-10-21 created
+* 2017-10-26 created
 */
 package com.cjd.ssm.pojo;
 
 import java.io.Serializable;
 
-/**
-* @Author marcle
-* @version 1.0 2017-10-21
- */
-public class sysRolePermission implements Serializable {
-    /** */
-    private Integer id;
+import com.cjd.ssm.base.BaseEntity;
 
-    /** */
+public class SysRolePermission extends BaseEntity<SysRolePermission> implements Serializable {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/** */
     private String roleid;
 
     /** */
     private String permissionid;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getRoleid() {
         return roleid;
@@ -45,4 +40,5 @@ public class sysRolePermission implements Serializable {
     public void setPermissionid(String permissionid) {
         this.permissionid = permissionid == null ? null : permissionid.trim();
     }
+
 }

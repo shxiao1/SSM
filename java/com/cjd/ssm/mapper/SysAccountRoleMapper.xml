@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjd.ssm.mapper.SysAccountRoleMapper">
+  <resultMap id="BaseResultMap" type="com.cjd.ssm.pojo.SysAccountRole">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="accountid" jdbcType="VARCHAR" property="accountid" />
+    <result column="roleid" jdbcType="VARCHAR" property="roleid" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountid, roleid, creater, created, updater, updated, del_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_account_role
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_account_role
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cjd.ssm.pojo.SysAccountRole">
+    insert into sys_account_role (id, accountid, roleid, 
+      creater, created, updater, 
+      updated, del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{accountid,jdbcType=VARCHAR}, #{roleid,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{updated,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjd.ssm.pojo.SysAccountRole">
+    insert into sys_account_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="accountid != null">
+        accountid,
+      </if>
+      <if test="roleid != null">
+        roleid,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="accountid != null">
+        #{accountid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null">
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjd.ssm.pojo.SysAccountRole">
+    update sys_account_role
+    <set>
+      <if test="accountid != null">
+        accountid = #{accountid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null">
+        roleid = #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjd.ssm.pojo.SysAccountRole">
+    update sys_account_role
+    set accountid = #{accountid,jdbcType=VARCHAR},
+      roleid = #{roleid,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectAll" parameterType="com.cjd.ssm.pojo.SysAccountRole" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_account_role t
+    <where>
+      <include refid="findAllWhere" />
+    </where>
+    <if test="orderStr!=null">
+      <![CDATA[
+           order by  ${orderStr}
+      ]]>
+    </if>
+  </select>
+  <sql id="findAllWhere">
+    <if test="accountid != null and accountid!=''">
+      AND accountid = #{accountid,jdbcType=VARCHAR}
+    </if>
+    <if test="roleid != null and roleid!=''">
+      AND roleid = #{roleid,jdbcType=VARCHAR}
+    </if>
+    <if test="creater != null and creater!=''">
+      AND creater = #{creater,jdbcType=VARCHAR}
+    </if>
+    <if test="created != null">
+      AND created = #{created,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updater != null and updater!=''">
+      AND updater = #{updater,jdbcType=VARCHAR}
+    </if>
+    <if test="updated != null">
+      AND updated = #{updated,jdbcType=TIMESTAMP}
+    </if>
+    <if test="delFlag != null and delFlag!=''">
+      AND del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+  </sql>
+</mapper>

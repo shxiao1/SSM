@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjd.ssm.mapper.SysAccountMapper">
+  <resultMap id="BaseResultMap" type="com.cjd.ssm.pojo.SysAccount">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, creater, created, updater, updated, del_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_account
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+    <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select t.username,t.password from sys_account t 
+    where t.username = #{name,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_account
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cjd.ssm.pojo.SysAccount">
+    insert into sys_account (id, username, password, 
+      creater, created, updater, 
+      updated, del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{updated,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjd.ssm.pojo.SysAccount">
+    insert into sys_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjd.ssm.pojo.SysAccount">
+    update sys_account
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjd.ssm.pojo.SysAccount">
+    update sys_account
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectAll" parameterType="com.cjd.ssm.pojo.SysAccount" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_account t
+    <where>
+      <include refid="findAllWhere" />
+    </where>
+    <if test="orderStr!=null">
+      <![CDATA[
+           order by  ${orderStr}
+      ]]>
+    </if>
+  </select>
+  <sql id="findAllWhere">
+    <if test="username != null and username!=''">
+      AND username = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="password != null and password!=''">
+      AND password = #{password,jdbcType=VARCHAR}
+    </if>
+    <if test="creater != null and creater!=''">
+      AND creater = #{creater,jdbcType=VARCHAR}
+    </if>
+    <if test="created != null">
+      AND created = #{created,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updater != null and updater!=''">
+      AND updater = #{updater,jdbcType=VARCHAR}
+    </if>
+    <if test="updated != null">
+      AND updated = #{updated,jdbcType=TIMESTAMP}
+    </if>
+    <if test="delFlag != null and delFlag!=''">
+      AND del_flag = #{delFlag,jdbcType=VARCHAR}
+    </if>
+  </sql>
+</mapper>

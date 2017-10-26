@@ -74,7 +74,7 @@
 </body>
 
 <script type="text/javascript">
-	//点击菜单添加选项卡
+	//点击菜单项添加选项卡
 	function index_addtab(node)
 	{
 		//获取选项卡，如果已经存在就选择并刷新，如果没存在就添加
@@ -98,7 +98,7 @@
 
 	}
 
-	//创建选项卡
+	//选项卡初始化
 	var index_tabs = $('#index_tabs').tabs(
 		{
 			fit : true,
@@ -141,7 +141,7 @@
 			}
 		});
 	
-	//首页
+	//首页初始化，获取索引为0的创建页面
 	var tab = index_tabs.tabs('getTab', 0);
 	$('#index_tabs')
 			.tabs(

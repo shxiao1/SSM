@@ -9,17 +9,24 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cjd.ssm.pojo.SysAccount;
+import com.cjd.ssm.service.SysAccountService;
 
 
 
 public class MyRealm extends AuthorizingRealm {
+	
+	@Autowired
+	SysAccountService sysAccountService;
+	
 
-    private static final String USER_NAME = "";  
-    private static final String PASSWORD = "";  
+	
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) { 
     	
-    	String username = principals.getPrimaryPrincipal().toString() ;
+    	/*String username = principals.getPrimaryPrincipal().toString() ;*/
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo() ;
 /*        Set<String> roleName = t_userService.findRoles(username) ;
         Set<String> permissions = t_userService.findPermissions(username) ;
@@ -31,8 +38,11 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authcToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        if(token.getUsername().equals(USER_NAME)){
-            return new SimpleAuthenticationInfo(USER_NAME, PASSWORD, getName());  
+        
+        SysAccount sysAccount=sysAccountService.findByName(token.getUsername());
+        
+        if(token.getUsername().equals(sysAccount.getUsername())){
+            return new SimpleAuthenticationInfo(sysAccount.getUsername(), sysAccount.getPassword(), getName());  
         }else{
             throw new AuthenticationException();  
         }
