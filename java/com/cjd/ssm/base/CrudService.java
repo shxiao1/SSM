@@ -63,9 +63,9 @@ public  class CrudService<D extends CrudDao<T>, T extends BaseEntity<T> >  {
      */
 	@Transactional(readOnly = false)
     public int insert(T record){
-    	
-		
 		record.setId(IdGen.uuid());
+		record.setDelFlag("0");
+		
     	return dao.insert(record);
     }
 

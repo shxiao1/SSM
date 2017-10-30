@@ -36,7 +36,7 @@ public class SysAccountRole extends BaseEntity<SysAccountRole> implements Serial
     }
 
     public void setroleid(String roleid) {
-        this.roleid = roleid == null ? null : roleid.trim();
+        this.roleid = roleid;
     }
 
 }

@@ -24,6 +24,9 @@ public class SysAccount extends BaseEntity<SysAccount> implements Serializable {
 
     /** */
     private String password;
+    
+    private String roleid;
+    
 
 
 
@@ -46,6 +49,16 @@ public class SysAccount extends BaseEntity<SysAccount> implements Serializable {
 	public String getSysAccount()
 	{
 		return (String) SecurityUtils.getSubject().getPrincipal();
+	}
+
+	public String getRoleid()
+	{
+		return roleid;
+	}
+
+	public void setRoleid(String roleid)
+	{
+		this.roleid = roleid;
 	}
     
 }

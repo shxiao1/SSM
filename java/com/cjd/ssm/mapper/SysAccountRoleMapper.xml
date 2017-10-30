@@ -90,9 +90,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.cjd.ssm.pojo.SysAccountRole">
     update sys_account_role
     <set>
-      <if test="accountid != null">
-        accountid = #{accountid,jdbcType=VARCHAR},
-      </if>
       <if test="roleid != null">
         roleid = #{roleid,jdbcType=VARCHAR},
       </if>
@@ -112,7 +109,7 @@
         del_flag = #{delFlag,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where accountid = #{accountid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cjd.ssm.pojo.SysAccountRole">
     update sys_account_role
@@ -131,7 +128,7 @@
     from sys_account_role t
     <where>
       <include refid="findAllWhere" />
-    </where>
+    </where> 
     <if test="orderStr!=null">
       <![CDATA[
            order by  ${orderStr}
@@ -140,25 +137,25 @@
   </select>
   <sql id="findAllWhere">
     <if test="accountid != null and accountid!=''">
-      AND accountid = #{accountid,jdbcType=VARCHAR}
+      AND t.accountid = #{accountid,jdbcType=VARCHAR}
     </if>
     <if test="roleid != null and roleid!=''">
-      AND roleid = #{roleid,jdbcType=VARCHAR}
+      AND t.roleid = #{roleid,jdbcType=VARCHAR}
     </if>
     <if test="creater != null and creater!=''">
-      AND creater = #{creater,jdbcType=VARCHAR}
+      AND t.creater = #{creater,jdbcType=VARCHAR}
     </if>
     <if test="created != null">
-      AND created = #{created,jdbcType=TIMESTAMP}
+      AND t.created = #{created,jdbcType=TIMESTAMP}
     </if>
     <if test="updater != null and updater!=''">
-      AND updater = #{updater,jdbcType=VARCHAR}
+      AND t.updater = #{updater,jdbcType=VARCHAR}
     </if>
     <if test="updated != null">
-      AND updated = #{updated,jdbcType=TIMESTAMP}
+      AND t.updated = #{updated,jdbcType=TIMESTAMP}
     </if>
     <if test="delFlag != null and delFlag!=''">
-      AND del_flag = #{delFlag,jdbcType=VARCHAR}
+      AND t.del_flag = #{delFlag,jdbcType=VARCHAR}
     </if>
   </sql>
 </mapper>

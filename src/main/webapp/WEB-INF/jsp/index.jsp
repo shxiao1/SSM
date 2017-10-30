@@ -47,7 +47,7 @@
 				<ul class="easyui-tree tree" style="border: left"
 					data-options="fit:true,border:false,onClick:index_addtab">
 					<li iconCls="fi-torso-business" data-options="url:'/ssm/sys/account/list'">账号管理</li>
-					<li iconCls="fi-database">角色管理</li>
+					<li iconCls="fi-database" data-options="url:'/ssm/sys/role/list'" >角色管理</li>
 					<li iconCls="fi-results-demographics">权限管理</li>
 				</ul>
 			</div>

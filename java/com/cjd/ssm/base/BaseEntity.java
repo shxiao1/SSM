@@ -30,7 +30,7 @@ public abstract class BaseEntity<T> implements Serializable
 	protected String order;// datagrid的参数
 
 	/** */
-	private String delFlag;
+	private String delFlag="0";
 
     
 	public String getCreater()

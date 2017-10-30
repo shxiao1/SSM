@@ -8,16 +8,14 @@
 	,method:'post',pageList:[5,10,15,20,50],fit:true,striped:true,fitColumns:true,onLoadSuccess:function (data) {
                        
                         $('.accountlist_change').linkbutton({text:'修改',plain:true,iconCls:'fi-pencil'});
-                      $('.accountlist_fenpei').linkbutton({text:'分配角色',plain:true,iconCls:'fi-results-demographics'});
-                    
-                    
                     }">
 	<thead>
 		<tr>
 			<th data-options="field:'id',checkbox:true"></th>
 			<th data-options="field:'username',width:'14%',align:'center'">账号</th>
 			<th data-options="field:'password',width:'14%',align:'center'">密码</th>
-			<th data-options="field:'creater',width:'14%',align:'center'">创建人</th>
+			<th data-options="field:'roleid',width:'28%',align:'center'">拥有角色</th>
+			<!-- <th data-options="field:'creater',width:'14%',align:'center'">创建人</th> -->
 			<th
 				data-options="field:'created',sortable:true,width:'18%',align:'center'">创建时间</th>
 			<!-- 		<th data-options="field:'updater',width:'14%',align:'center'">修改人</th>
@@ -50,8 +48,10 @@
 		//因为有多行 所以要用class
 		operation += '<a href="javascript:void(0);" href="javascript:void(0);" class="accountlist_change" onClick="accountlist_change(\''
 			+ row.id + '\')">修改</a>';
-		operation += '<a href="javascript:void(0);" href="javascript:void(0);" class="accountlist_fenpei" onClick="accountlist_fenpei(\''
-			+ row.id + '\')">分配角色</a>';
+	/* 	operation += '<a href="javascript:void(0);" href="javascript:void(0);" class="accountlist_fenpei" onClick="accountlist_fenpei(\''
+			+ row.id + '\')">分配角色</a>'; 
+			  $('.accountlist_fenpei').linkbutton({text:'分配角色',plain:true,iconCls:'fi-results-demographics'});
+			*/
 
 		return operation;
 	}
@@ -134,7 +134,8 @@
 		/* 
 		不用这个方法的原因是有个先后顺序，所以要传参才不会出BUG
 		var row = $('#accountlist_list').datagrid('getSelected');
-		 */$('#accountlist_dialog').dialog(
+		 */
+		$('#accountlist_dialog').dialog(
 		{
 			title : '修改',
 			iconCls : 'fi-pencil',
@@ -166,5 +167,41 @@
 		});
 
 		$('#accountlist_dialog').dialog('center');
+	}
+
+	function accountlist_fenpei(id)
+	{
+		$('#accountlist_dialog').dialog(
+			{
+				title : '分配角色',
+				iconCls : 'fi-results-demographics',
+				width : 400,
+				height : 200,
+				resizable : true,
+				closed : false,
+				cache : false,
+				href : '/ssm/sys/account/fenpeilist?id=' + id,
+				buttons :
+				[
+				{
+					text : '保存',
+					iconCls : 'icon-save',
+					handler : function()
+					{
+						$('#accountFenpei_form').submit();
+						$('#accountlist_dialog').dialog('close');
+					}
+				},
+				{
+					text : '关闭',
+					iconCls : 'fi-x ',
+					handler : function()
+					{
+						$('#accountlist_dialog').dialog('close');
+					}
+				} ]
+			});
+
+			$('#accountlist_dialog').dialog('center');
 	}
 </script>

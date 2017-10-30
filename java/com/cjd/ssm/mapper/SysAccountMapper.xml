@@ -10,6 +10,7 @@
     <result column="updater" jdbcType="VARCHAR" property="updater" />
     <result column="updated" jdbcType="TIMESTAMP" property="updated" />
     <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="roleid" jdbcType="VARCHAR" property="roleid" />
   </resultMap>
   <sql id="Base_Column_List">
     id, username, password, creater, created, updater, updated, del_flag
@@ -132,39 +133,44 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectAll" parameterType="com.cjd.ssm.pojo.SysAccount" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_account t
+    select a.roleid,t.id,t.username,t.`password`,t.creater,t.created 
+    <!-- <include refid="Base_Column_List" />  -->
+    from sys_account t left join sys_account_role a on a.accountid=t.id
     <where>
       <include refid="findAllWhere" />
-    </where>
+    </where> 
     <if test="orderStr!=null">
       <![CDATA[
            order by  ${orderStr}
       ]]>
     </if>
+      <if test="orderStr==null">
+      <![CDATA[
+           order by  t.created asc
+      ]]>
+    </if>
   </select>
   <sql id="findAllWhere">
     <if test="username != null and username!=''">
-      AND username = #{username,jdbcType=VARCHAR}
+      AND t.username = #{username,jdbcType=VARCHAR}
     </if>
     <if test="password != null and password!=''">
-      AND password = #{password,jdbcType=VARCHAR}
+      AND t.password = #{password,jdbcType=VARCHAR}
     </if>
     <if test="creater != null and creater!=''">
-      AND creater = #{creater,jdbcType=VARCHAR}
+      AND t.creater = #{creater,jdbcType=VARCHAR}
     </if>
     <if test="created != null">
-      AND created = #{created,jdbcType=TIMESTAMP}
+      AND t.created = #{created,jdbcType=TIMESTAMP}
     </if>
     <if test="updater != null and updater!=''">
-      AND updater = #{updater,jdbcType=VARCHAR}
+      AND t.updater = #{updater,jdbcType=VARCHAR}
     </if>
     <if test="updated != null">
-      AND updated = #{updated,jdbcType=TIMESTAMP}
+      AND t.updated = #{updated,jdbcType=TIMESTAMP}
     </if>
     <if test="delFlag != null and delFlag!=''">
-      AND del_flag = #{delFlag,jdbcType=VARCHAR}
+      AND t.del_flag = #{delFlag,jdbcType=VARCHAR}
     </if>
   </sql>
 </mapper>
