@@ -10,7 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.cjd.ssm.base.MyUtils;
+import com.cjd.ssm.base.Result;
+import com.cjd.ssm.pojo.SysAccount;
+import com.cjd.ssm.pojo.SysPermission;
 import com.cjd.ssm.pojo.SysRole;
+import com.cjd.ssm.service.SysPermissionService;
 import com.cjd.ssm.service.SysRoleService;
 
 @Controller
@@ -20,6 +24,9 @@ public class SysRoleController
 {
 	@Autowired
 	SysRoleService sysRoleService;
+
+	@Autowired
+	SysPermissionService sysPermissionService;
 
 	@ModelAttribute("sysRole")
 	public SysRole get(@RequestParam(required = false) String id)
@@ -43,9 +50,25 @@ public class SysRoleController
 	@ResponseBody
 	public List<SysRole> list(SysRole sysRole)
 	{
-		
+
 		List<SysRole> list = new ArrayList<SysRole>();
 		list = sysRoleService.findAll(sysRole);
+
+		for (int i = 0; i < list.size(); i++)
+		{
+			if (list.get(i).getUrl() != null && list.get(i).getUrl().length() > 0)
+			{
+				String url = "";
+				String[] urls = list.get(i).getUrl().split(",");
+				for (int j = 0; j < urls.length; j++)
+				{
+					url += sysPermissionService.findById(urls[j]).getName() + ",";
+				}
+				url = url.substring(0, url.length() - 1);
+				list.get(i).setUrl(url);
+			}
+		}
+
 		return list;
 	}
 
@@ -58,27 +81,30 @@ public class SysRoleController
 
 	@RequestMapping(value = "/save")
 	@ResponseBody
-	public String save(SysRole sysRole, Model model, String type)
+	public Result save(SysRole sysRole, Model model, String type)
 	{
+		Result result = new Result();
+		SysRole sysRole1 = new SysRole();
+		sysRole1.setRolename(sysRole.getRolename());
 
-		//新增、删除
 		if (type.equals("1"))
 		{
-			//感觉这里应该用静态方法做工具类的，嫌麻烦就直接这样用了
-			sysRole.setCreater(MyUtils.getSysAccount());
-			sysRole.setCreated(new Date());
-			
-			sysRoleService.insert(sysRole);
-		} else if(type.equals("2"))
-		{
-			sysRole.setUpdater(MyUtils.getSysAccount());
-			sysRole.setUpdated(new Date());
-			
-			sysRoleService.updateById(sysRole);
-
+			if (sysRoleService.findAll(sysRole1) != null && sysRoleService.findAll(sysRole1).size() > 0)
+			{
+				result.setMsg("已存在该账号");
+				return result;
+			}
 		}
 
-		return "新增成功";
+		sysRoleService.insertRole(sysRole, type);
+		if (type.equals("1"))
+		{
+			result.setMsg("新增成功");
+		}else
+		{
+			result.setMsg("修改成功");
+		}
+		return result;
 	}
 
 	@RequestMapping(value = "/del")
@@ -89,4 +115,13 @@ public class SysRoleController
 		sysRoleService.updateByIdSelective(sysRole);
 		return "删除成功";
 	}
+
+	@RequestMapping(value = "/combobox", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SysPermission> combobox(SysAccount sysAccount, Model model)
+	{
+
+		return sysPermissionService.findAll(new SysPermission());
+	}
+
 }

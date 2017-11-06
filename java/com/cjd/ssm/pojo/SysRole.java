@@ -7,31 +7,35 @@
 package com.cjd.ssm.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import com.cjd.ssm.base.BaseEntity;
 
-/**
-* @Author marcle
-* @version 1.0 2017-10-26
- */
 public class SysRole extends BaseEntity<SysRole> implements Serializable {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	/** */
-    private String rolename;
+	private String rolename;
+    
+    private String url;
 
+	public String getUrl()
+	{
+		return url;
+	}
 
-    public String getRolename() {
-        return rolename;
-    }
+	public void setUrl(String url)
+	{
+		this.url = url;
+	}
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename == null ? null : rolename.trim();
-    }
+	public String getRolename()
+	{
+		return rolename;
+	}
+
+	public void setRolename(String rolename)
+	{
+		this.rolename = rolename;
+	}
 
 }

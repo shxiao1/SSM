@@ -44,7 +44,7 @@ public class SysAccountService extends CrudService<SysAccountMapper, SysAccount>
 			sysAccountMapper.insert(sysAccount);
 		} else if(type.equals("2"))
 		{
-			sysAccount.setUpdater(sysAccount.getSysAccount());
+			sysAccount.setUpdater(MyUtils.getSysAccount());
 			sysAccount.setUpdated(new Date());
 			sysAccountMapper.updateByPrimaryKeySelective(sysAccount);
 		}
@@ -57,6 +57,7 @@ public class SysAccountService extends CrudService<SysAccountMapper, SysAccount>
 			
 			sysAccountRole.setId(IdGen.uuid());
 			sysAccountRole.setDelFlag("0");
+			
 			sysAccountRole.setroleid(sysAccount.getRoleid());
 			sysAccountRole.setCreater(MyUtils.getSysAccount());
 			sysAccountRole.setCreated(new Date());
@@ -64,7 +65,6 @@ public class SysAccountService extends CrudService<SysAccountMapper, SysAccount>
 		}
 		else
 		{
-			sysAccountRole.setAccountid(sysAccount.getId());
 			sysAccountRole.setroleid(sysAccount.getRoleid());
 			sysAccountRole.setUpdater(sysAccount.getSysAccount());
 			sysAccountRole.setUpdated(new Date());

@@ -48,7 +48,7 @@
 					data-options="fit:true,border:false,onClick:index_addtab">
 					<li iconCls="fi-torso-business" data-options="url:'/ssm/sys/account/list'">账号管理</li>
 					<li iconCls="fi-database" data-options="url:'/ssm/sys/role/list'" >角色管理</li>
-					<li iconCls="fi-results-demographics">权限管理</li>
+					<li iconCls="fi-results-demographics" data-options="url:'/ssm/sys/permission/list'" >权限管理</li>
 				</ul>
 			</div>
 
@@ -67,7 +67,7 @@
 
 	<div data-options="region:'south'" style="height: 30px;">
 		<div
-			style="line-height: 30px; overflow: hidden; text-align: center; background-color: rgb(238, 238, 238); width: 100%; height: 30px;">池剑迪
+			style="line-height: 30px; overflow: hidden; text-align: center; background-color: rgb(238, 238, 238); width: 100%; height: 28px;">池剑迪
 			联系方式:15858508283</div>
 	</div>
 

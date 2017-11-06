@@ -90,9 +90,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.cjd.ssm.pojo.SysRolePermission">
     update sys_role_permission
     <set>
-      <if test="roleid != null">
-        roleid = #{roleid,jdbcType=VARCHAR},
-      </if>
       <if test="permissionid != null">
         permissionid = #{permissionid,jdbcType=VARCHAR},
       </if>
@@ -112,7 +109,7 @@
         del_flag = #{delFlag,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where roleid = #{roleid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cjd.ssm.pojo.SysRolePermission">
     update sys_role_permission

@@ -14,10 +14,9 @@
     id, rolename, creater, created, updater, updated, del_flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_role
-    where id = #{id,jdbcType=VARCHAR}
+    select t.id,t.rolename ,t.creater,t.created ,a.permissionid as url
+    from sys_role t left join sys_role_permission a on a.roleid=t.id
+    where t.id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_role
@@ -115,9 +114,9 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectAll" parameterType="com.cjd.ssm.pojo.SysRole" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_role t
+    select t.id,t.rolename ,t.creater,t.created ,a.permissionid as url
+<!--     <include refid="Base_Column_List" /> -->
+    from sys_role t left join sys_role_permission a on a.roleid=t.id
     <where>
       <include refid="findAllWhere" />
     </where>
@@ -129,22 +128,22 @@
   </select>
   <sql id="findAllWhere">
     <if test="rolename != null and rolename!=''">
-      AND rolename = #{rolename,jdbcType=VARCHAR}
+      AND t.rolename = #{rolename,jdbcType=VARCHAR}
     </if>
     <if test="creater != null and creater!=''">
-      AND creater = #{creater,jdbcType=VARCHAR}
+      AND t.creater = #{creater,jdbcType=VARCHAR}
     </if>
     <if test="created != null">
-      AND created = #{created,jdbcType=TIMESTAMP}
+      AND t.created = #{created,jdbcType=TIMESTAMP}
     </if>
     <if test="updater != null and updater!=''">
-      AND updater = #{updater,jdbcType=VARCHAR}
+      AND t.updater = #{updater,jdbcType=VARCHAR}
     </if>
     <if test="updated != null">
-      AND updated = #{updated,jdbcType=TIMESTAMP}
+      AND t.updated = #{updated,jdbcType=TIMESTAMP}
     </if>
     <if test="delFlag != null and delFlag!=''">
-      AND del_flag = #{delFlag,jdbcType=VARCHAR}
+      AND t.del_flag = #{delFlag,jdbcType=VARCHAR}
     </if>
   </sql>
 </mapper>

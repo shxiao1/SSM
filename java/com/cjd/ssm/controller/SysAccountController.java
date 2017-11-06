@@ -25,7 +25,7 @@ public class SysAccountController
 {
 	@Autowired
 	SysAccountService sysAccountService;
-	
+
 	@Autowired
 	SysRoleService sysRoleService;
 
@@ -53,28 +53,35 @@ public class SysAccountController
 	{
 		List<SysAccount> list = new ArrayList<SysAccount>();
 		list = sysAccountService.findAll(sysAccount);
-		//根据rowid获取rowname
-		for(int i=0;i<list.size();i++)
+		// 根据rowid获取rowname
+		for (int i = 0; i < list.size(); i++)
 		{
-			if(list.get(i).getRoleid()!=null&&list.get(i).getRoleid().length()>0)
+			if (list.get(i).getRoleid() != null && list.get(i).getRoleid().length() > 0)
 			{
-				String rolename="";
-				String[] rowid=list.get(i).getRoleid().split(",");
-				for(int j=0;j<rowid.length;j++)
+				String rolename = "";
+				String[] rowid = list.get(i).getRoleid().split(",");
+				for (int j = 0; j < rowid.length; j++)
 				{
-					rolename+=sysRoleService.findById(rowid[j]).getRolename()+",";
+					rolename += sysRoleService.findById(rowid[j]).getRolename() + ",";
 				}
-				rolename=rolename.substring(0, rolename.length()-1);
+				rolename = rolename.substring(0, rolename.length() - 1);
 				list.get(i).setRoleid(rolename);
 			}
 		}
-		
+
 		return list;
 	}
 
 	@RequestMapping(value = "/addlist")
 	public String addlist(SysAccount sysAccount, Model model)
 	{
+		/*
+		 * String rolename = ""; String[] rowid =
+		 * sysAccount.getRoleid().split(","); for (int j = 0; j < rowid.length;
+		 * j++) { rolename += sysRoleService.findById(rowid[j]).getRolename() +
+		 * ","; } rolename = rolename.substring(0, rolename.length() - 1);
+		 * sysAccount.setRoleid(rolename);
+		 */
 
 		return "/sysAccount/sysAccountAdd";
 	}
@@ -83,34 +90,36 @@ public class SysAccountController
 	@ResponseBody
 	public Result save(SysAccount sysAccount, Model model, String type)
 	{
-		Result result=new Result();
-	/*	//新增、修改
+		Result result = new Result();
+		/*
+		 * //新增、修改 if (type.equals("1")) {
+		 * sysAccount.setCreater(MyUtils.getSysAccount());
+		 * sysAccount.setCreated(new Date());
+		 * 
+		 * sysAccountService.insert(sysAccount); } else if(type.equals("2")) {
+		 * sysAccount.setUpdater(sysAccount.getSysAccount());
+		 * sysAccount.setUpdated(new Date()); }
+		 */
+		SysAccount sysAccount1 = new SysAccount();
+		sysAccount1.setUsername(sysAccount.getUsername());
 		if (type.equals("1"))
 		{
-			sysAccount.setCreater(MyUtils.getSysAccount());
-			sysAccount.setCreated(new Date());
-			
-			sysAccountService.insert(sysAccount);
-		} else if(type.equals("2"))
+			if (sysAccountService.findAll(sysAccount1) != null && sysAccountService.findAll(sysAccount1).size() > 0)
+			{
+				result.setMsg("已存在该账号");
+				return result;
+			}
+		}
+
+		sysAccountService.insertAccount(sysAccount, type);
+
+		if (type.equals("1"))
 		{
-			sysAccount.setUpdater(sysAccount.getSysAccount());
-			sysAccount.setUpdated(new Date());
-		}	*/
-		SysAccount sysAccount1=new SysAccount();
-		sysAccount1.setUsername(sysAccount.getUsername());
-		if(type=="1")
+			result.setMsg("新增成功");
+		}else
 		{
-			
-		if(sysAccountService.findAll(sysAccount1)!=null&&sysAccountService.findAll(sysAccount1).size()>0)
-				{
-					result.setMsg("已存在该账号");
-					return result;
-				}
-		}				
-		
-		
-		sysAccountService.insertAccount(sysAccount,type);
-		result.setMsg("新增成功");
+			result.setMsg("修改成功");
+		}
 		return result;
 	}
 
@@ -118,28 +127,24 @@ public class SysAccountController
 	@ResponseBody
 	public String del(SysAccount sysAccount)
 	{
-		
-		
+
 		sysAccount.setDelFlag("1");
 		sysAccountService.updateByIdSelective(sysAccount);
 		return "删除成功";
 	}
-	
+
 	@RequestMapping(value = "/fenpeilist")
 	public String fenpeilist(SysAccount sysAccount, Model model)
 	{
 
 		return "/sysAccount/sysAccountFenpei";
 	}
-	
+
 	@RequestMapping(value = "/combobox", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SysRole> combobox(SysAccount sysAccount, Model model)
 	{
 
-		
-		
-		
 		return sysRoleService.findAll(new SysRole());
 	}
 }

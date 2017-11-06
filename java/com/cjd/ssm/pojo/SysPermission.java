@@ -7,14 +7,9 @@
 package com.cjd.ssm.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import com.cjd.ssm.base.BaseEntity;
 
-/**
-* @Author marcle
-* @version 1.0 2017-10-26
- */
 public class SysPermission extends BaseEntity<SysPermission> implements Serializable {
     /**
 	 * 
@@ -23,7 +18,7 @@ public class SysPermission extends BaseEntity<SysPermission> implements Serializ
 
     /** */
     private String name;
-
+    private String url;
 
 
     public String getName() {
@@ -33,5 +28,15 @@ public class SysPermission extends BaseEntity<SysPermission> implements Serializ
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
+
+	public String getUrl()
+	{
+		return url;
+	}
+
+	public void setUrl(String url)
+	{
+		this.url = url;
+	}
 
 }

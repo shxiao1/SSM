@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<form id="accountAdd_form">
-	<table id="accountAdd_table" style="margin: 10px">
+<form id="sysAccountAdd_form">
+	<table id="sysAccountAdd_table" style="margin: 10px">
 		<tr>
 			<td>账号：</td>
-			<td><input name="username" id="accountAdd_username"
+			<td><input name="username" 
 				class="easyui-textbox easyui-validatebox"
 				data-options="required:true,validType:['length[0,20]'],delay:'0'"
 				style="height: 23px; border-radius: 7px"
@@ -21,7 +21,9 @@
 		</tr>
 		<tr>
 			<td>角色：</td>
-			<td><input id="sysAccountAdd_combobox" name="roleid" ></td>
+			<td><input id="sysAccountAdd_combobox" name="roleid" data-options="value:'${sysAccount.roleid}',onSelect:function(record){    
+                console.log(record);
+            }""></td>
 		</tr>
 	</table>
 
@@ -31,7 +33,7 @@
 	{
 		//防止admin被修改
 		if ('${sysAccount.username}' == 'admin')
-			$('#accountAdd_username').attr('readonly', true);
+			$('#sysAccountAdd_username').attr('readonly', true);
 		
 		$('#sysAccountAdd_combobox').combobox({  
 			panelHeight:'auto',
@@ -56,7 +58,7 @@
 		type = 2;
 	}
 
-	$('#accountAdd_form').form(
+	$('#sysAccountAdd_form').form(
 	{
 		url : '/ssm/sys/account/save',
 		queryParams :
@@ -71,8 +73,8 @@
 		{
 		/* 	console.log(data);
 			console.log(JSON.parse(data)); */
-			$('#accountlist_dialog').dialog('close');
-			$('#accountlist_list').datagrid('reload');
+			$('#sysAccountlist_dialog').dialog('close');
+			$('#sysAccountlist_list').datagrid('reload');
 			$.messager.show(
 			{
 				title : '提示',

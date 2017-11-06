@@ -10,7 +10,7 @@ public abstract class BaseEntity<T> implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	protected String id;
-	protected String orderStr;
+	protected String orderStr="created asc";
 	/** */
 	private String creater;
 

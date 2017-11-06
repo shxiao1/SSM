@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.cjd.ssm.pojo.SysPermission">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="creater" jdbcType="VARCHAR" property="creater" />
     <result column="created" jdbcType="TIMESTAMP" property="created" />
     <result column="updater" jdbcType="VARCHAR" property="updater" />
@@ -11,7 +12,7 @@
     <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, creater, created, updater, updated, del_flag
+    id, name, url, creater, created, updater, updated, del_flag
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -24,12 +25,12 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.cjd.ssm.pojo.SysPermission">
-    insert into sys_permission (id, name, creater, 
-      created, updater, updated, 
-      del_flag)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
-      #{created,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{updated,jdbcType=TIMESTAMP}, 
-      #{delFlag,jdbcType=VARCHAR})
+    insert into sys_permission (id, name, url, 
+      creater, created, updater, 
+      updated, del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{updated,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cjd.ssm.pojo.SysPermission">
     insert into sys_permission
@@ -39,6 +40,9 @@
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="url != null">
+        url,
       </if>
       <if test="creater != null">
         creater,
@@ -63,6 +67,9 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
       <if test="creater != null">
         #{creater,jdbcType=VARCHAR},
       </if>
@@ -86,6 +93,9 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
       <if test="creater != null">
         creater = #{creater,jdbcType=VARCHAR},
       </if>
@@ -107,6 +117,7 @@
   <update id="updateByPrimaryKey" parameterType="com.cjd.ssm.pojo.SysPermission">
     update sys_permission
     set name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
       creater = #{creater,jdbcType=VARCHAR},
       created = #{created,jdbcType=TIMESTAMP},
       updater = #{updater,jdbcType=VARCHAR},
@@ -130,6 +141,9 @@
   <sql id="findAllWhere">
     <if test="name != null and name!=''">
       AND name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="url != null and url!=''">
+      AND url = #{url,jdbcType=VARCHAR}
     </if>
     <if test="creater != null and creater!=''">
       AND creater = #{creater,jdbcType=VARCHAR}
