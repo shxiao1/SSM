@@ -6,7 +6,10 @@
 */
 package com.cjd.ssm.mapper;
 
+import java.util.Set;
+
 import com.cjd.ssm.base.CrudDao;
 
 public interface SysRoleMapper extends CrudDao<com.cjd.ssm.pojo.SysRole> {
+
 }

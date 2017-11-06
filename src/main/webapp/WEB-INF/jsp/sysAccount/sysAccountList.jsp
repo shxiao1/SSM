@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+	<%@include file="/../WEB-INF/head/head2.jsp"%>
 <table id="sysAccountlist_list" class="easyui-datagrid" title="账号管理"
 	style="height: 400px"
 	data-options="toolbar:'#sysAccountlist_toolbar',singleSelect:true,
 	loadMsg: '数据正在加载,请耐心的等待...',pagination:true,pageSize: 15,url:'/ssm/sys/account/list'
 	,method:'post',pageList:[5,10,15,20,50],fit:true,striped:true,fitColumns:true,onLoadSuccess:function (data) {
-                       
                         $('.sysAccountlist_change').linkbutton({text:'修改',plain:true,iconCls:'fi-pencil'});
                     }">
 	<thead>
@@ -26,8 +25,11 @@
 	</thead>
 </table>
 <div id="sysAccountlist_toolbar">
-	<a onclick="sysAccountlist_add('0');" href="javascript:void(0);"
+	<shiro:hasRole name="业务员">
+		<a onclick="sysAccountlist_add('0');" href="javascript:void(0);"
 		class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus'">新增</a>
+	</shiro:hasRole>
+
 	<a onclick="sysAccountlist_del();" href="javascript:void(0);"
 		class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-x '">删除</a>
 </div>
@@ -48,26 +50,26 @@
 		//因为有多行 所以要用class
 		operation += '<a href="javascript:void(0);" href="javascript:void(0);" class="sysAccountlist_change" onClick="sysAccountlist_add(\''
 			+ row.id + '\')">修改</a>';
-	/* 	operation += '<a href="javascript:void(0);" href="javascript:void(0);" class="sysAccountlist_fenpei" onClick="sysAccountlist_fenpei(\''
-			+ row.id + '\')">分配角色</a>'; 
-			  $('.sysAccountlist_fenpei').linkbutton({text:'分配角色',plain:true,iconCls:'fi-results-demographics'});
-			*/
+		/* 	operation += '<a href="javascript:void(0);" href="javascript:void(0);" class="sysAccountlist_fenpei" onClick="sysAccountlist_fenpei(\''
+				+ row.id + '\')">分配角色</a>'; 
+				  $('.sysAccountlist_fenpei').linkbutton({text:'分配角色',plain:true,iconCls:'fi-results-demographics'});
+		 */
 
 		return operation;
 	}
 	function sysAccountlist_add(id)
 	{
-		var title="新增";
+		var title = "新增";
 		var iconCls = 'fi-plus';
-		if(id!="0")
+		if (id != "0")
 		{
-			title="修改";
+			title = "修改";
 			iconCls = 'fi-pencil';
 		}
 		$('#sysAccountlist_dialog').dialog(
 		{
 			title : title,
-			iconCls :iconCls,
+			iconCls : iconCls,
 			width : 400,
 			height : 200,
 			resizable : true,
@@ -136,18 +138,54 @@
 
 	}
 
-/* 	function sysAccountlist_change(id)
+	/* 	function sysAccountlist_change(id)
+	 {
+	 $('#sysAccountlist_dialog').dialog(
+	 {
+	 title : '修改',
+	 iconCls : 'fi-pencil',
+	 width : 400,
+	 height : 200,
+	 resizable : true,
+	 closed : false,
+	 cache : false,
+	 href : '/ssm/sys/sysAccount/addlist?id=' + id,
+	 buttons :
+	 [
+	 {
+	 text : '保存',
+	 iconCls : 'icon-save',
+	 handler : function()
+	 {
+	 $('#sysAccountAdd_form').submit();
+	 $('#sysAccountlist_dialog').dialog('close');
+	 }
+	 },
+	 {
+	 text : '关闭',
+	 iconCls : 'fi-x ',
+	 handler : function()
+	 {
+	 $('#sysAccountlist_dialog').dialog('close');
+	 }
+	 } ]
+	 });
+
+	 $('#sysAccountlist_dialog').dialog('center');
+	 }
+	 */
+	function sysAccountlist_fenpei(id)
 	{
 		$('#sysAccountlist_dialog').dialog(
 		{
-			title : '修改',
-			iconCls : 'fi-pencil',
+			title : '分配角色',
+			iconCls : 'fi-results-demographics',
 			width : 400,
 			height : 200,
 			resizable : true,
 			closed : false,
 			cache : false,
-			href : '/ssm/sys/sysAccount/addlist?id=' + id,
+			href : '/ssm/sys/account/fenpeilist?id=' + id,
 			buttons :
 			[
 			{
@@ -155,7 +193,7 @@
 				iconCls : 'icon-save',
 				handler : function()
 				{
-					$('#sysAccountAdd_form').submit();
+					$('#sysAccountFenpei_form').submit();
 					$('#sysAccountlist_dialog').dialog('close');
 				}
 			},
@@ -170,41 +208,5 @@
 		});
 
 		$('#sysAccountlist_dialog').dialog('center');
-	}
- */
-	function sysAccountlist_fenpei(id)
-	{
-		$('#sysAccountlist_dialog').dialog(
-			{
-				title : '分配角色',
-				iconCls : 'fi-results-demographics',
-				width : 400,
-				height : 200,
-				resizable : true,
-				closed : false,
-				cache : false,
-				href : '/ssm/sys/account/fenpeilist?id=' + id,
-				buttons :
-				[
-				{
-					text : '保存',
-					iconCls : 'icon-save',
-					handler : function()
-					{
-						$('#sysAccountFenpei_form').submit();
-						$('#sysAccountlist_dialog').dialog('close');
-					}
-				},
-				{
-					text : '关闭',
-					iconCls : 'fi-x ',
-					handler : function()
-					{
-						$('#sysAccountlist_dialog').dialog('close');
-					}
-				} ]
-			});
-
-			$('#sysAccountlist_dialog').dialog('center');
 	}
 </script>

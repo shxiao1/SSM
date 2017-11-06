@@ -73,16 +73,18 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/sys/login"/>
-			<!--拦截所有除了 <mvc:exclude-mapping 
-				path="/static/**"/> <mvc:exclude-mapping path="/sys/sysDic/**"/> <mvc:exclude-mapping 
-				path="/sys/sysGroup/**"/> -->
+			<mvc:exclude-mapping path="/sys/login" />
+			<!--拦截所有除了 <mvc:exclude-mapping path="/static/**"/> <mvc:exclude-mapping 
+				path="/sys/sysDic/**"/> <mvc:exclude-mapping path="/sys/sysGroup/**"/> -->
 			<bean class="com.cjd.ssm.interceptor.SysLogInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-	
+
 	<context:component-scan base-package="com.cjd.ssm" />
-	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
-<!--   <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"></bean>
- -->
+	<bean
+		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"></bean> -->
+	<!-- 开启权限分配 -->
+	<aop:config proxy-target-class="true" />
+
 </beans>    

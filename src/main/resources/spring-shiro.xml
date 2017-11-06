@@ -42,7 +42,6 @@
                 /js/**=anon
                 /images/**=anon
                 /**=user
-                <!--等权限认证弄完了就设置回来 /**=user -->
             </value>
         </property>
     </bean>
@@ -56,4 +55,5 @@
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>
+    
 </beans>

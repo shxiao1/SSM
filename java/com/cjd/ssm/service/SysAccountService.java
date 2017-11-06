@@ -4,6 +4,7 @@ package com.cjd.ssm.service;
 
 
 import java.util.Date;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,6 +72,31 @@ public class SysAccountService extends CrudService<SysAccountMapper, SysAccount>
 			sysAccountRoleMapper.updateByPrimaryKeySelective(sysAccountRole);
 		}
 	
+	}
+
+	public String findRoles(String username)
+	{
+		// TODO 自动生成的方法存根
+		return sysAccountMapper.findRoles(username);
+	}
+
+
+
+	public String findRole(String roleid)
+	{
+		// TODO 自动生成的方法存根
+		return sysAccountMapper.findRole(roleid);
+	}
+
+	public String findPermissions(String roleid)
+	{
+		// TODO 自动生成的方法存根
+		return sysAccountMapper.findPermissions(roleid);
+	}
+	public String findPermission(String permissionid)
+	{
+		// TODO 自动生成的方法存根
+		return sysAccountMapper.findPermission(permissionid);
 	}
 	
 }

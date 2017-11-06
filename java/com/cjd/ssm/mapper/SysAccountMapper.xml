@@ -22,6 +22,29 @@
     where t.id = #{id,jdbcType=VARCHAR}
   </select>
   
+  <select id="findRoles" parameterType="java.lang.String" resultType="String">
+ 	 select a.roleid from sys_account t 
+	left join sys_account_role a on a.accountid=t.id
+	where t.username= #{username,jdbcType=VARCHAR} 	
+  </select>
+  
+  <select id="findRole" parameterType="java.lang.String" resultType="String">
+ 	 select t.rolename from sys_role t where t.id= #{roleid,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
+  <select id="findPermissions" parameterType="java.lang.String" resultType="String">
+  select a.permissionid from sys_role t 
+left join sys_role_permission a on a.roleid=t.id
+where t.rolename=#{roleid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findPermission" parameterType="java.lang.String" resultType="String">
+	  select t.url from sys_permission t where t.id= #{permissionid,jdbcType=VARCHAR}
+  </select>
+
+  
     <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select t.username,t.password from sys_account t 
     where t.username = #{name,jdbcType=VARCHAR}
