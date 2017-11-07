@@ -98,9 +98,9 @@
 	function sysPermissionList_del()
 	{
 		var row = $('#sysPermissionList_list').datagrid('getSelected');
-		if (row == null || row.username == 'admin')
+		if (row == null )
 		{
-			$.messager.alert('(⊙o⊙)…', '凑傻逼，想删我！', 'info');
+			$.messager.alert('提示', '清选择删除的行！', 'info');
 		} else
 		{
 			$.messager.confirm('删除', '请确保没有账号拥有该角色？', function(r)

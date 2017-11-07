@@ -69,7 +69,7 @@ public class MyRealm extends AuthorizingRealm
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 
 		SysAccount sysAccount = sysAccountService.findByName(token.getUsername());
-
+		
 		if (token.getUsername().equals(sysAccount.getUsername()))
 		{
 			return new SimpleAuthenticationInfo(sysAccount.getUsername(), sysAccount.getPassword(), getName());

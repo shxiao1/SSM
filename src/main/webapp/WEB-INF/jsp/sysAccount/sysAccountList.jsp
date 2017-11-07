@@ -25,11 +25,8 @@
 	</thead>
 </table>
 <div id="sysAccountlist_toolbar">
-	<shiro:hasRole name="业务员">
 		<a onclick="sysAccountlist_add('0');" href="javascript:void(0);"
 		class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus'">新增</a>
-	</shiro:hasRole>
-
 	<a onclick="sysAccountlist_del();" href="javascript:void(0);"
 		class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-x '">删除</a>
 </div>
@@ -106,7 +103,7 @@
 		console.log(row);
 		if (row == null || row.username == 'admin')
 		{
-			$.messager.alert('(⊙o⊙)…', '凑傻逼，想删我！', 'info');
+			$.messager.alert('提示', '无法删除！', 'info');
 		} else
 		{
 			$.messager.confirm('删除', '确认要删除吗？', function(r)

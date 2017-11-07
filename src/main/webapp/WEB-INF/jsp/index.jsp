@@ -7,7 +7,7 @@
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  -->
 <%@include file="/WEB-INF/head/head.jsp"%>
-
+<%@include file="/WEB-INF/head/head2.jsp"%>
 <title>首页</title>
 
 <style type="text/css">
@@ -24,7 +24,7 @@
 </head>
 
 <body class="easyui-layout">
-	<div data-options="region:'north'" style="height:100px;">
+	<div data-options="region:'north'" style="height: 100px;">
 		<div class="logo">
 			<a><img style="width: 100%; height: 100%;"
 				src="/ssm/images/upback.png"></a>
@@ -43,15 +43,27 @@
 				</ul>
 			</div> -->
 
-			<div title="系统管理" iconCls="fi-layout">
+			<div title="业务功能" iconCls="fi-layout">
 				<ul class="easyui-tree tree" style="border: left"
 					data-options="fit:true,border:false,onClick:index_addtab">
-					<li iconCls="fi-torso-business" data-options="url:'/ssm/sys/account/list'">账号管理</li>
-					<li iconCls="fi-database" data-options="url:'/ssm/sys/role/list'" >角色管理</li>
-					<li iconCls="fi-results-demographics" data-options="url:'/ssm/sys/permission/list'" >权限管理</li>
+					<li iconCls="fi-torso-business" data-options="">账号管理</li>
+					<li iconCls="fi-database" data-options="">角色管理</li>
+					<li iconCls="fi-results-demographics" data-options="">权限管理</li>
 				</ul>
 			</div>
 
+			<shiro:hasRole name="超级管理员">
+				<div title="系统管理" iconCls="fi-layout">
+					<ul class="easyui-tree tree" style="border: left"
+						data-options="fit:true,border:false,onClick:index_addtab">
+						<li iconCls="fi-torso-business"
+							data-options="url:'/ssm/sys/account/list'">账号管理</li>
+						<li iconCls="fi-database" data-options="url:'/ssm/sys/role/list'">角色管理</li>
+						<li iconCls="fi-results-demographics"
+							data-options="url:'/ssm/sys/permission/list'">权限管理</li>
+					</ul>
+				</div>
+			</shiro:hasRole>
 		</div>
 
 	</div>
@@ -60,15 +72,15 @@
 			<div title="首页"
 				data-options="iconCls:'fi-home',border:false,fit:true"
 				style="overflow: hidden;"></div>
-				
+
 		</div>
 	</div>
 
 
 	<div data-options="region:'south'" style="height: 30px;">
 		<div
-			style="line-height: 30px; overflow: hidden; text-align: center; background-color: rgb(238, 238, 238); width: 100%; height: 28px;">池剑迪
-			联系方式:15858508283</div>
+			style="line-height: 30px; overflow: hidden; text-align: center; background-color: rgb(238, 238, 238); width: 100%; height: 28px;">XXX
+			联系方式:xxxxxxxxxxxx</div>
 	</div>
 
 </body>
@@ -91,7 +103,7 @@
 				border : false,
 				closable : true,
 				fit : true,
-				href:node.url,   
+				href : node.url,
 				iconCls : node.iconCls
 			});
 		}
@@ -140,22 +152,22 @@
 			{
 			}
 		});
-	
+
 	//首页初始化，获取索引为0的创建页面
 	var tab = index_tabs.tabs('getTab', 0);
 	$('#index_tabs')
-			.tabs(
-					'update',
-					{
-						tab : tab,
-						options : {
-							content : '<iframe name="indextab" scrolling="auto" src="/ssm/sys/home" frameborder="0" style="width:100%;height:100%;"></iframe>',
-							closable : false,
-							selected : true
-						}
-					});
-	
-	
+		.tabs(
+			'update',
+			{
+				tab : tab,
+				options :
+				{
+					content : '<iframe name="indextab" scrolling="auto" src="/ssm/sys/home" frameborder="0" style="width:100%;height:100%;"></iframe>',
+					closable : false,
+					selected : true
+				}
+			});
+
 	//刷新选项卡
 	function refreshTab()
 	{

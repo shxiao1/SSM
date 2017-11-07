@@ -26,10 +26,12 @@
  	 select a.roleid from sys_account t 
 	left join sys_account_role a on a.accountid=t.id
 	where t.username= #{username,jdbcType=VARCHAR} 	
+	and t.del_flag='0'
   </select>
   
   <select id="findRole" parameterType="java.lang.String" resultType="String">
  	 select t.rolename from sys_role t where t.id= #{roleid,jdbcType=VARCHAR}
+ 	 and t.del_flag='0'
   </select>
   
   
@@ -38,16 +40,18 @@
   select a.permissionid from sys_role t 
 left join sys_role_permission a on a.roleid=t.id
 where t.rolename=#{roleid,jdbcType=VARCHAR}
+and t.del_flag='0'
   </select>
   
   <select id="findPermission" parameterType="java.lang.String" resultType="String">
 	  select t.url from sys_permission t where t.id= #{permissionid,jdbcType=VARCHAR}
+	  and t.del_flag='0'
   </select>
 
   
     <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select t.username,t.password from sys_account t 
-    where t.username = #{name,jdbcType=VARCHAR}
+    where t.username = #{name,jdbcType=VARCHAR} and t.del_flag='0'
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

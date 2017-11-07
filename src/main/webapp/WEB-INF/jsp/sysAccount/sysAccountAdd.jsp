@@ -22,8 +22,8 @@
 		<tr>
 			<td>角色：</td>
 			<td><input id="sysAccountAdd_combobox" name="roleid" data-options="value:'${sysAccount.roleid}',onSelect:function(record){    
-                console.log(record);
-            }""></td>
+              
+            }"></td>
 		</tr>
 	</table>
 
@@ -31,6 +31,7 @@
 <script>
 	$(function()
 	{
+		
 		//防止admin被修改
 		if ('${sysAccount.username}' == 'admin')
 			$('#sysAccountAdd_username').attr('readonly', true);
