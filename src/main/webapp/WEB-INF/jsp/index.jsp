@@ -27,7 +27,7 @@
 	<div data-options="region:'north'" style="height: 100px;">
 		<div class="logo">
 			<a><img style="width: 100%; height: 100%;"
-				src="/ssm/images/upback.png"></a>
+				src="/ssm/images/top.jpg"></a>
 		</div>
 	</div>
 	<div data-options="region:'west',title:'菜单',split:true"
