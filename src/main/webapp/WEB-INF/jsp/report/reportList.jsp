@@ -41,15 +41,11 @@
 
 	});
 	function formatOper(val, row, index) {
+		console.log(row);
 		var operation = '';
 		//因为有多行 所以要用class
 		operation += '<a href="javascript:void(0);" href="javascript:void(0);" class="reportlist_change" onClick="reportlist_add(\''
 				+ row.id + '\')">修改</a>';
-				/* 	operation += '<a href="javascript:void(0);" href="javascript:void(0);" class="reportlist_fenpei" onClick="reportlist_fenpei(\''
-				+ row.id + '\')">分配角色</a>'; 
-				  $('.reportlist_fenpei').linkbutton({text:'分配角色',plain:true,iconCls:'fi-results-demographics'});
-		 */
-
 		return operation;
 	}
 	function reportlist_add(id) {

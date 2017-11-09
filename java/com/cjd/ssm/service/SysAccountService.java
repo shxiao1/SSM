@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.cjd.ssm.pojo.*;
-import com.cjd.ssm.utils.IdGen;
+import com.cjd.ssm.utils.MyUtils;
+import com.cjd.ssm.utils.MyUtils;
 import com.cjd.ssm.mapper.SysAccountMapper;
 import com.cjd.ssm.mapper.SysAccountRoleMapper;
 import com.cjd.ssm.base.*;
@@ -39,7 +40,7 @@ public class SysAccountService extends CrudService<SysAccountMapper, SysAccount>
 		//新增、修改account
 		if (type.equals("1"))
 		{
-			sysAccount.setId(IdGen.uuid());
+			sysAccount.setId(MyUtils.uuid());
 			sysAccount.setCreater(MyUtils.getSysAccount());
 			sysAccount.setCreated(new Date());
 			sysAccountMapper.insert(sysAccount);
@@ -56,7 +57,7 @@ public class SysAccountService extends CrudService<SysAccountMapper, SysAccount>
 		if(sysAccountRoleMapper.selectAll(sysAccountRole).size()==0)
 		{
 			
-			sysAccountRole.setId(IdGen.uuid());
+			sysAccountRole.setId(MyUtils.uuid());
 			sysAccountRole.setDelFlag("0");
 			
 			sysAccountRole.setroleid(sysAccount.getRoleid());

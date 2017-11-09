@@ -9,7 +9,6 @@ import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.cjd.ssm.base.MyUtils;
 import com.cjd.ssm.base.Result;
 import com.cjd.ssm.pojo.SysAccount;
 import com.cjd.ssm.pojo.SysPermission;
