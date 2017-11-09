@@ -5,13 +5,13 @@ package com.cjd.ssm.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.cjd.ssm.pojo.*;
-import com.cjd.ssm.utils.IdGen;
+import com.cjd.ssm.utils.MyUtils;
+import com.cjd.ssm.utils.MyUtils;
 import com.cjd.ssm.mapper.SysRoleMapper;
 import com.cjd.ssm.mapper.SysRolePermissionMapper;
 import com.cjd.ssm.base.*;
@@ -34,7 +34,7 @@ public class SysRoleService extends CrudService<SysRoleMapper, SysRole>
 		//新增、修改account
 		if (type.equals("1"))
 		{
-			sysRole.setId(IdGen.uuid());
+			sysRole.setId(MyUtils.uuid());
 			sysRole.setCreater(MyUtils.getSysAccount());
 			sysRole.setCreated(new Date());
 			sysRoleMapper.insert(sysRole);
@@ -52,7 +52,7 @@ public class SysRoleService extends CrudService<SysRoleMapper, SysRole>
 				if(list.size()==0)
 				{
 					
-					sysRolePermission.setId(IdGen.uuid());
+					sysRolePermission.setId(MyUtils.uuid());
 					sysRolePermission.setDelFlag("0");
 					sysRolePermission.setPermissionid(sysRole.getUrl());
 					sysRolePermission.setCreater(MyUtils.getSysAccount());

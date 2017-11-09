@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cjd.ssm.utils.IdGen;
+import com.cjd.ssm.utils.MyUtils;
 
 
 @Transactional(readOnly = true)
@@ -63,7 +63,7 @@ public  class CrudService<D extends CrudDao<T>, T extends BaseEntity<T> >  {
      */
 	@Transactional(readOnly = false)
     public int insert(T record){
-		record.setId(IdGen.uuid());
+		record.setId(MyUtils.uuid());
 		record.setDelFlag("0");
 		
     	return dao.insert(record);
@@ -75,7 +75,7 @@ public  class CrudService<D extends CrudDao<T>, T extends BaseEntity<T> >  {
 	@Transactional(readOnly = false)
     public int insertSelective(T record){
     	
-    	record.setId(IdGen.uuid());;	
+    	record.setId(MyUtils.uuid());;	
     	return dao.insertSelective(record);
     }
 

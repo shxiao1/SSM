@@ -25,10 +25,20 @@
 
 <body class="easyui-layout">
 	<div data-options="region:'north'" style="height: 100px;">
-		<div class="logo">
-			<a><img style="width: 100%; height: 100%;"
-				src="/ssm/images/top.jpg"></a>
+		<div
+			style="width: 100%; height: 100%; background-size: 100% 100%; background-image: url('/ssm/images/top.jpg');">
+				<div style="float: right; margin: 50px 60px 0 0; color: red">
+				<span>欢迎${user }</span>
+			<a id="index_logout">
+				
+				退出
+			</a>
+				</div>
+
+			<!-- 	<a><img style="width: 100%; height: 100%;"
+				src="/ssm/images/upback.png"></a> -->
 		</div>
+
 	</div>
 	<div data-options="region:'west',title:'菜单',split:true"
 		style="width: 250px;">
@@ -46,9 +56,8 @@
 			<div title="业务功能" iconCls="fi-layout">
 				<ul class="easyui-tree tree" style="border: left"
 					data-options="fit:true,border:false,onClick:index_addtab">
-					<li iconCls="fi-torso-business" data-options="">账号管理</li>
-					<li iconCls="fi-database" data-options="">角色管理</li>
-					<li iconCls="fi-results-demographics" data-options="">权限管理</li>
+					<li iconCls="fi-torso-business" data-options="url:'/ssm/report/list'">业务提交</li>
+					<li iconCls="fi-results-demographics" data-options="url:'/ssm/see/list'">报表浏览</li>
 				</ul>
 			</div>
 
@@ -87,18 +96,14 @@
 
 <script type="text/javascript">
 	//点击菜单项添加选项卡
-	function index_addtab(node)
-	{
+	function index_addtab(node) {
 		//获取选项卡，如果已经存在就选择并刷新，如果没存在就添加
 		var t = $('#index_tabs');
-		if (t.tabs('exists', node.text))
-		{
+		if (t.tabs('exists', node.text)) {
 			t.tabs('select', node.text);
 			refreshTab();
-		} else
-		{
-			t.tabs('add',
-			{
+		} else {
+			t.tabs('add', {
 				title : node.text,
 				border : false,
 				closable : true,
@@ -112,83 +117,94 @@
 
 	//选项卡初始化
 	var index_tabs = $('#index_tabs').tabs(
-		{
-			fit : true,
-			border : false,
-			tools :
-			[
-				{
-					//工具条-主页 索引为0的
-					iconCls : 'fi-home ',
-					handler : function()
-					{
-						index_tabs.tabs('select', 0);
-					}
-				},
-				{
-					//获取工具条选择的对象，刷新
-					iconCls : 'fi-loop',
-					handler : function()
-					{
-						refreshTab();
-					}
-				},
-				{
-					//选项卡-关闭
-					iconCls : 'fi-x',
-					handler : function()
-					{
-						var index = index_tabs.tabs('getTabIndex', index_tabs
-							.tabs('getSelected'));
-						var tab = index_tabs.tabs('getTab', index);
-						console.log(tab);
-						if (tab.panel('options').closable)
-						{
-							index_tabs.tabs('close', index);
-						}
-					}
-				} ],
-			onSelect : function(title)
 			{
-			}
-		});
+				fit : true,
+				border : false,
+				tools : [
+						{
+							//工具条-主页 索引为0的
+							iconCls : 'fi-home ',
+							handler : function() {
+								index_tabs.tabs('select', 0);
+							}
+						},
+						{
+							//获取工具条选择的对象，刷新
+							iconCls : 'fi-loop',
+							handler : function() {
+								refreshTab();
+							}
+						},
+						{
+							//选项卡-关闭
+							iconCls : 'fi-x',
+							handler : function() {
+								var index = index_tabs.tabs('getTabIndex',
+										index_tabs.tabs('getSelected'));
+								var tab = index_tabs.tabs('getTab', index);
+								console.log(tab);
+								if (tab.panel('options').closable) {
+									index_tabs.tabs('close', index);
+								}
+							}
+						} ],
+				onSelect : function(title) {
+				}
+			});
 
 	//首页初始化，获取索引为0的创建页面
 	var tab = index_tabs.tabs('getTab', 0);
-	$('#index_tabs')
-		.tabs(
-			'update',
-			{
-				tab : tab,
-				options :
-				{
-					content : '<iframe name="indextab" scrolling="auto" src="/ssm/sys/home" frameborder="0" style="width:100%;height:100%;"></iframe>',
-					closable : false,
-					selected : true
-				}
-			});
+	$('#index_tabs').tabs(
+					'update',
+					{
+						tab : tab,
+						options : {
+							content : '<iframe name="indextab" scrolling="auto" src="/ssm/sys/home" frameborder="0" style="width:100%;height:100%;"></iframe>',
+							closable : false,
+							selected : true
+						}
+					});
 
 	//刷新选项卡
-	function refreshTab()
-	{
+	function refreshTab() {
 		var index = index_tabs.tabs('getTabIndex', index_tabs
-			.tabs('getSelected'));
+				.tabs('getSelected'));
 		var tab = index_tabs.tabs('getTab', index);
 		var options = tab.panel('options');
-		if (options.content)
-		{
-			index_tabs.tabs('update',
-			{
+		if (options.content) {
+			index_tabs.tabs('update', {
 				tab : tab,
-				options :
-				{
+				options : {
 					content : options.content
 				}
 			});
-		} else
-		{
+		} else {
 			tab.panel('refresh', options.href);
 		}
 	}
+
+	$('#index_logout').click(function() {
+		$.messager.confirm('确认','是否退出账号？',function(r){    
+		    if (r){   
+		    	$.ajax({
+					type : 'POST',
+					url : '/ssm/sys/logout',
+					success : function(data) {
+						window.location.href="/ssm/sys/login"
+						$.messager.show({
+							title : '提示',
+							msg : '退出成功',
+						});
+					}
+				})
+		    }    
+		});  
+
+
+		
+		
+		
+		
+	})
 </script>
 </html>
