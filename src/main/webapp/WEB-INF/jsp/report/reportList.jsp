@@ -10,6 +10,9 @@
                     }">
 	<thead>
 		<tr>
+		
+		
+		
 			<th data-options="field:'id',checkbox:true"></th>
 			<th data-options="field:'a',width:'14%',align:'center'">借款人</th>
 			<th data-options="field:'a',width:'14%',align:'center'">逾期期数</th>
