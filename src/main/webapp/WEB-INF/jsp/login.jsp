@@ -25,7 +25,7 @@
 	<div class="page-container">
 		<h1>Login</h1>
 		<form id="login_form" method="post">
-			<input type="text" id="login_username" class="username" placeholder="Username"> <input type="password" id="login_password" name="password" class="password" placeholder="Password">
+			<input type="text" id="login_username" name="username" placeholder="Username"> <input type="password" id="login_password" name="password" class="password" placeholder="Password">
 			<a id=login_btn href="javascript:void(0);" style="margin-top:20px" class="easyui-linkbutton" data-options="width:'300px',height:'50px'">Sign me in</a>  
 		</form>
 
@@ -41,9 +41,7 @@ $(function () {
 }); 
 	//用户名不为空
 	$('#login_username').blur(function(){
-		console.log(name);
 		var name=$('#login_username').val();
-		console.log(name);
 		if(name==undefined||name==""){
 			$.messager.alert("注意","请输入用户名");
 		}
@@ -70,10 +68,7 @@ $(function () {
 		    },    
 		    success:function(data){ 
 		    	window.location.href = "/ssm/sys/login";
-		    }    
-		    error:function(data){ 
-		    	window.location.href = "/ssm/sys/login";
-		    }  
+		    }
 		});  
 
 		/* $('#login_form').submit(); */

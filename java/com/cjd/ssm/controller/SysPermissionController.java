@@ -9,12 +9,10 @@ import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.cjd.ssm.base.MyUtils;
 import com.cjd.ssm.base.Result;
 import com.cjd.ssm.pojo.SysPermission;
-import com.cjd.ssm.pojo.SysRole;
 import com.cjd.ssm.service.SysPermissionService;
-import com.cjd.ssm.utils.IdGen;
+import com.cjd.ssm.utils.MyUtils;
 
 @Controller
 @RequestMapping(value = "/sys/permission")
@@ -68,7 +66,7 @@ public class SysPermissionController
 		//新增、修改account
 		if (type.equals("1"))
 		{
-			sysPermission.setId(IdGen.uuid());
+			sysPermission.setId(MyUtils.uuid());
 			sysPermission.setCreater(MyUtils.getSysAccount());
 			sysPermission.setCreated(new Date());
 			result.setMsg("新增成功");
